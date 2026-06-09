@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<title>爆改文案 · 流量爆款引擎</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+
+:root {
+  --or: #ff4e2a;
+  --am: #ffaa00;
+  --grad: linear-gradient(135deg, #ff4e2a 0%, #ffaa00 100%);
+  --grad-text: linear-gradient(135deg, #ff6a3d, #ffc040);
+  --bg: #09090c;
+  --bg2: #0f0f14;
+  --bg3: #16161d;
+  --bg4: #1c1c25;
+  --bd: #26263a;
+  --bd2: #32324a;
+  --t: #eeeaf8;
+  --t2: #7a7590;
+  --t3: #3e3d55;
+  --green: #00e096;
+  --blue: #4a9eff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--t);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bd2); border-radius: 3px; }
+
+/* ── HEADER ── */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,9,12,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--bd);
+  padding: 0 32px;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  font-size: 16px; font-weight: 900;
+  background: var(--grad-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+.logo span { font-weight: 400; color: var(--t3); -webkit-text-fill-color: var(--t3); font-size: 12px; margin-left: 8px; letter-spacing: 1px; }
+.credits-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 12px; color: var(--t2);
+}
+.credits-num { font-weight: 700; color: var(--am); font-size: 14px; }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 32px 48px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 500px;
+  background: radial-gradient(ellipse, #ff4e2a18 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #ff4e2a15, #ffaa0015);
+  border: 1px solid #ff4e2a30;
+  color: var(--am); font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  padding: 5px 16px; border-radius: 20px; margin-bottom: 20px;
+}
+.hero-eyebrow::before { content: '⚡'; }
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900; line-height: 1.15; letter-spacing: -1.5px;
+  margin-bottom: 12px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: var(--grad-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 15px; color: var(--t2); max-width: 480px;
+  margin: 0 auto 32px; line-height: 1.8;
+}
+.style-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; margin-bottom: 0;
+}
+.style-pill {
+  background: var(--bg3); border: 1px solid var(--bd);
+  color: var(--t2); font-size: 12px; padding: 4px 14px; border-radius: 20px;
+}
+
+/* ── MAIN LAYOUT ── */
+.app {
+  max-width: 960px; margin: 0 auto;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .app { grid-template-columns: 1fr; }
+}
+
+/* ── PANEL ── */
+.panel {
+  background: var(--bg2);
+  border: 1px solid var(--bd);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.panel-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--bd);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3);
+}
+.panel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--grad); flex-shrink: 0;
+}
+.panel-title { font-size: 12px; font-weight: 700; color: var(--t2); letter-spacing: 1px; text-transform: uppercase; }
+.panel-body { padding: 18px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+
+/* ── CONTROLS ── */
+.label { font-size: 11px; font-weight: 700; color: var(--t3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+
+textarea {
+  width: 100%; min-height: 160px;
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 10px; padding: 14px 16px;
+  color: var(--t); font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; line-height: 1.7; resize: vertical;
+  transition: border-color .2s;
+  outline: none;
+}
+textarea:focus { border-color: var(--bd2); }
+textarea::placeholder { color: var(--t3); }
+
+.style-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.style-btn {
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 10px; padding: 10px 8px;
+  text-align: center; cursor: pointer;
+  transition: all .2s; color: var(--t2);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 12px; font-weight: 500;
+}
+.style-btn:hover { border-color: var(--bd2); color: var(--t); }
+.style-btn.active {
+  border-color: var(--or);
+  background: linear-gradient(135deg, #ff4e2a15, #ffaa0008);
+  color: var(--am);
+}
+.style-btn .icon { font-size: 18px; display: block; margin-bottom: 4px; }
+
+/* ── SUBMIT BTN ── */
+.submit-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
+  border: none; border-radius: 12px;
+  color: #fff; font-family: 'Noto Sans SC', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
+  cursor: pointer; transition: opacity .2s, transform .15s;
+  position: relative; overflow: hidden;
+}
+.submit-btn:hover { opacity: 0.92; }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.submit-btn.running {
+  animation: btnBounce 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes btnBounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(0.96); }
+  60%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+.submit-btn .btn-shine {
+  position: absolute; top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: shine 2.5s infinite;
+}
+@keyframes shine { to { left: 160%; } }
+
+/* ── RESULT AREA ── */
+.result-area {
+  flex: 1; min-height: 200px;
+  background: var(--bg3); border: 1px solid var(--bd);
+  border-radius: 10px; padding: 16px;
+  font-size: 14px; line-height: 1.9; color: var(--t);
+  white-space: pre-wrap; word-break: break-word;
+  position: relative;
+}
+.result-placeholder {
+  color: var(--t3); font-size: 13px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; height: 100%; min-height: 180px;
+  gap: 10px; text-align: center;
+}
+.result-placeholder .ph-icon { font-size: 32px; opacity: 0.4; }
+
+/* ── LOADING ── */
+.loading-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 180px; gap: 16px;
+}
+.loading-bar {
+  width: 120px; height: 3px; background: var(--bg4);
+  border-radius: 2px; overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%; width: 40%;
+  background: var(--grad);
+  border-radius: 2px;
+  animation: bar 1.4s ease-in-out infinite;
+}
+@keyframes bar {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(150%); }
+  100% { transform: translateX(300%); }
+}
+.loading-txt { font-size: 13px; color: var(--t2); }
+
+/* ── COPY BTN ── */
+.copy-btn {
+  width: 100%; padding: 11px;
+  background: transparent; border: 1px solid var(--bd2);
+  border-radius: 10px; color: var(--t2);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: all .2s; display: none;
+}
+.copy-btn:hover { border-color: var(--or); color: var(--am); }
+.copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+/* ── CREDITS EMPTY ── */
+.empty-credits {
+  background: linear-gradient(135deg, #1e1008, #1a1010);
+  border: 1px solid #ff4e2a30;
+  border-radius: 12px; padding: 20px;
+  text-align: center;
+}
+.empty-credits h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.empty-credits p { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
+.contact-link {
+  display: inline-block;
+  background: var(--grad); color: #fff;
+  border-radius: 8px; padding: 8px 20px;
+  font-size: 13px; font-weight: 700;
+  text-decoration: none;
+}
+
+/* ── ACTIVATE MODAL ── */
+.modal-mask {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center;
+}
+.modal-mask.open { display: flex; }
+.modal {
+  background: var(--bg2); border: 1px solid var(--bd2);
+  border-radius: 20px; padding: 32px 28px;
+  width: 360px; max-width: 90vw;
+  animation: popIn .25s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.modal h2 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+.modal h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.modal p { font-size: 13px; color: var(--t2); margin-bottom: 20px; line-height: 1.7; }
+.modal input {
+  width: 100%; background: var(--bg3); border: 1px solid var(--bd2);
+  border-radius: 10px; padding: 12px 16px;
+  color: var(--t); font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; outline: none; margin-bottom: 12px;
+  transition: border-color .2s;
+}
+.modal input:focus { border-color: var(--or); }
+.modal input::placeholder { color: var(--t3); }
+.modal-submit {
+  width: 100%; padding: 13px;
+  background: #4a9eff; border: none; border-radius: 10px;
+  color: #fff; font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: opacity .2s;
+}
+.modal-submit:hover { opacity: 0.9; }
+.modal-err { font-size: 12px; color: #ff6b6b; margin-top: 8px; min-height: 18px; }
+
+/* ── HISTORY STRIP ── */
+.history-strip {
+  max-width: 960px; margin: 0 auto 0;
+  padding: 0 24px;
+}
+.history-title { font-size: 11px; font-weight: 700; color: var(--t3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+.history-list { display: flex; flex-direction: column; gap: 8px; }
+.history-item {
+  background: var(--bg2); border: 1px solid var(--bd);
+  border-radius: 12px; padding: 12px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+  cursor: pointer; transition: border-color .2s;
+}
+.history-item:hover { border-color: var(--bd2); }
+.history-style {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  background: var(--bg4); border: 1px solid var(--bd);
+  color: var(--am); padding: 2px 8px; border-radius: 6px;
+  flex-shrink: 0; margin-top: 2px;
+}
+.history-preview { font-size: 12px; color: var(--t2); line-height: 1.6; flex: 1; }
+
+/* ── FOOTER ── */
+.footer { text-align: center; padding: 24px; font-size: 11px; color: var(--t3); letter-spacing: 1px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">爆改文案 <span>· 流量爆款引擎</span></div>
+  <div class="credits-badge">
+    剩余次数
+    <span class="credits-num" id="creditsNum">—</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">AI 驱动 · DeepSeek-V3</div>
+  <h1>普通文案<br/><em>一键爆改</em></h1>
+  <p class="hero-sub">覆盖小红书/抖音/短视频/直播全场景，输入卖点，30秒打造高转化爆款文案。</p>
+  <div class="style-pills">
+    <span class="style-pill">📱 抖音带货口播</span>
+    <span class="style-pill">🎬 短视频脚本</span>
+    <span class="style-pill">🛍️ 直播话术</span>
+    <span class="style-pill">📕 小红书种草</span>
+    <span class="style-pill">💬 接地气吐槽</span>
+    <span class="style-pill">🔥 爆款标题</span>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app">
+
+  <!-- LEFT: INPUT -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-dot"></div>
+      <span class="panel-title">输入你的原始文案</span>
+    </div>
+    <div class="panel-body">
+      <div>
+        <div class="label">原稿 / 卖点描述</div>
+        <textarea id="inputText" placeholder="把你的产品卖点、原始文案、或者几个关键词粘贴到这里...
+
+比如：这款空气炸锅功能很多，可以炸鸡烤蔬菜做蛋糕，厨房必备。"></textarea>
+      </div>
+
+      <div>
+        <div class="label">选择改写风格</div>
+        <div class="style-grid" id="styleGrid">
+          <button class="style-btn active" data-style="video">
+            <span class="icon">🎬</span>短视频脚本
+          </button>
+          <button class="style-btn" data-style="plant">
+            <span class="icon">🛍️</span>种草带货
+          </button>
+          <button class="style-btn" data-style="xhs">
+            <span class="icon">📕</span>小红书风
+          </button>
+          <button class="style-btn" data-style="complaint">
+            <span class="icon">😅</span>接地气吐槽
+          </button>
+          <button class="style-btn" data-style="dry">
+            <span class="icon">📊</span>干货拆解
+          </button>
+          <button class="style-btn" data-style="title">
+            <span class="icon">🔥</span>爆款标题
+          </button>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submitBtn">
+        <span class="btn-shine"></span>
+        ⚡ 一键爆改
+      </button>
+    </div>
+  </div>
+
+  <!-- RIGHT: OUTPUT -->
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-dot"></div>
+      <span class="panel-title">改写结果</span>
+    </div>
+    <div class="panel-body">
+      <div class="result-area" id="resultArea">
+        <div class="result-placeholder" id="placeholder">
+          <span class="ph-icon">✨</span>
+          <span>改写结果将在这里出现</span>
+          <span style="font-size:12px;color:var(--t3);">选好风格，点击「一键爆改」</span>
+        </div>
+      </div>
+      <button class="copy-btn" id="copyBtn">📋 复制文案</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- HISTORY -->
+<div class="history-strip" id="historyStrip" style="display:none;">
+  <div class="history-title">最近生成记录</div>
+  <div class="history-list" id="historyList"></div>
+</div>
+
+<!-- ACTIVATE MODAL -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <h2>输入<em>激活码</em></h2>
+    <p>请输入购买后获得的激活码，激活后即可开始使用。<br/>没有激活码？联系客服购买。</p>
+    <p style="font-size:11px;color:var(--t3);margin-bottom:16px;line-height:1.6;">激活即表示您已阅读并同意<span style="color:var(--t2);">《使用须知与免责声明》</span>，本工具生成内容仅供参考，请勿用于违法违规用途。</p>
+    <input type="text" id="codeInput" placeholder="请输入激活码，如：EV-XXXX-XXXX"/>
+    <button class="modal-submit" id="modalSubmit">确认激活</button>
+    <div class="modal-err" id="modalErr"></div>
+  </div>
+</div>
+
+<div class="footer">爆改文案 · 流量爆款引擎 · Powered by DeepSeek-V3</div>
+
+<div style="max-width:860px;margin:0 auto;padding:0 24px 40px;">
+  <div style="background:#0f0f14;border:1px solid #26263a;border-radius:12px;padding:20px 22px;margin-top:8px;">
+    <div style="font-size:11px;font-weight:700;color:#3e3d55;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;">免责声明 · 使用须知</div>
+    <div style="font-size:12px;color:#4a4760;line-height:1.9;">
+      1. 本工具由 AI 辅助生成内容，所有输出结果仅供参考，用户需自行审核内容的准确性、合规性与版权归属，平台不承担因使用生成内容产生的任何法律责任。<br/>
+      2. 严禁将本工具用于生成虚假广告、违规医疗宣传、金融产品推销、诈骗信息、侵权内容及任何违反中华人民共和国法律法规的内容。<br/>
+      3. 用户在使用本工具生成内容并发布至各平台时，须遵守对应平台的使用规范及相关法律法规，因违规发布产生的后果由用户自行承担。<br/>
+      4. 本工具不存储用户输入的任何内容，历史记录仅保存在用户本地浏览器中。<br/>
+      5. 激活码一经激活即视为同意以上条款，购买后不支持退款。
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// CONFIG — 填入你的硅基流动 Key
+// ══════════════════════════════════════════════
+// Key 已移至后端环境变量，前端不持有任何密钥
+const API_URL   = "/api/chat"; // 请求自己的 Vercel 函数
+
+// ══════════════════════════════════════════════
+// 激活码配置 — 在这里添加有效激活码和对应次数
+// 格式：{ "激活码": 次数 }
+// ══════════════════════════════════════════════
+const VALID_CODES = {
+  "EV-TEST-2026": 10,
+  "EV-BASIC-001": 30,
+  "EV-PRO-001":  100,
+};
+
+// ══════════════════════════════════════════════
+// PROMPTS
+// ══════════════════════════════════════════════
+const PROMPTS = {
+  video:     "你是一个抖音千万级账号的短视频操盘手。将用户文字改写成口播文案，规则如下：\n\n第一句话（最重要）：必须是一句完整的大白话，像真人随口说出来的，绝对禁止用方括号、书名号包裹，禁止'终极救星''必备神器'这类套话。从以下三种里选最适合的：\n- 数字冲击：'199块买了个耳机，结果两天没充电，我同事以为我买了苹果'\n- 反常识：'地铁里戴耳机的人，十个里面九个其实听不清'\n- 自我代入：'上班通勤两小时，没有降噪耳机我早崩了'\n\n中间部分：每个卖点单独一行，口语化，配emoji，每行不超过15字，像在跟朋友聊天\n\n最后一句：让用户感到'我也需要'的认同句，不用感叹号强行煽情\n\n全程禁止：终极/神器/救星/必备/超强/极致/完美 这类空洞形容词。\n\n重要：直接输出文案正文，禁止输出【前3秒】【中间】【结尾】等任何结构标签，禁止输出括号内的创作说明。",
+  plant:     "你是一个极其富有煽动力的带货种草达人。请将用户的文字转化成闺蜜好物安利文案：语气要真诚且急迫，多用'闭眼入'、'不允许还有人不知道'、'亲测好用'。重点突出解决什么问题，疯狂调动用户的购买和体验欲望！",
+  xhs:       "你是一个小红书百万粉丝的爆款制造机。请将用户给出的文字改写成极其地道的小红书风格：多用惊叹号、穿插丰富恰当的Emoji、口语化、制造情绪价值与共鸣，文末带上3个高流量热门标签(#)。",
+  complaint: "你是一个擅长制造话题和神评论的犀利段子手。请将用户的文字改写成极具互联网嘴替风格的接地气吐槽体：语气要带点自嘲、反讽、幽默戏谑，多用'家人们谁懂啊'、'大无语事件'等热梗，故意留下让人想在评论区反驳或共鸣的话题点。",
+  dry:       "你是一个有200万粉丝的知识类博主，擅长把复杂知识讲得让普通人秒懂。将用户文字改写成干货科普内容，遵守以下规则：\n\n① 第一句话必须是反常识结论，直接开门见山，不加任何标题或括号说明\n② 正文分3个点，每个点格式固定：序号+emoji+【两字主题】，然后换行写解释（2-3行口语化内容），再换行写一个生活化比喻\n③ 最后一句话是升华金句，直接写，不加括号或标签\n④ 全程口语化，禁止学术用语\n⑤ 字数控制在300字以内\n\n严格禁止：在任何内容前后加括号说明，如（反常识开头）（升华结尾）（文案拆解）等，直接输出正文。",
+  title:     "你是一个深谙人性弱点和点击率密码的标题党大师。不要改写全文，请根据用户提供的文字内容，直接生成 5 个不同风格的爆款自媒体标题（包含：震惊体、反常识体、悬念体、痛点戳破体、数字化对比体）。直接列出标题，不需要额外解释。",
+};
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let currentStyle = "video";
+let history = [];
+
+function getStorage(key) {
+  try { return localStorage.getItem(key); } catch(e) { return null; }
+}
+function setStorage(key, val) {
+  try { localStorage.setItem(key, val); } catch(e) {}
+}
+
+function getCredits() {
+  return parseInt(getStorage("ev_credits") || "0");
+}
+function setCredits(n) {
+  setStorage("ev_credits", String(n));
+  updateCreditsUI();
+}
+function updateCreditsUI() {
+  const n = getCredits();
+  document.getElementById("creditsNum").textContent = n > 0 ? n : "0";
+}
+function isActivated() {
+  return getCredits() > 0;
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+window.addEventListener("DOMContentLoaded", () => {
+  updateCreditsUI();
+
+  // Show activate modal if not activated
+  if (!isActivated()) {
+    document.getElementById("modalMask").classList.add("open");
+  }
+
+  // Style buttons
+  document.getElementById("styleGrid").addEventListener("click", e => {
+    const btn = e.target.closest(".style-btn");
+    if (!btn) return;
+    document.querySelectorAll(".style-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentStyle = btn.dataset.style;
+  });
+
+  // Submit
+  document.getElementById("submitBtn").addEventListener("click", handleSubmit);
+
+  // Copy
+  document.getElementById("copyBtn").addEventListener("click", handleCopy);
+
+  // Modal submit
+  document.getElementById("modalSubmit").addEventListener("click", handleActivate);
+  document.getElementById("codeInput").addEventListener("keydown", e => {
+    if (e.key === "Enter") handleActivate();
+  });
+});
+
+// ══════════════════════════════════════════════
+// ACTIVATE
+// ══════════════════════════════════════════════
+function handleActivate() {
+  const code = document.getElementById("codeInput").value.trim().toUpperCase();
+  const err  = document.getElementById("modalErr");
+
+  if (!code) { err.textContent = "请输入激活码"; return; }
+
+  if (VALID_CODES[code] !== undefined) {
+    const usedKey = "ev_used_" + code;
+    if (getStorage(usedKey)) {
+      err.textContent = "该激活码已被使用";
+      return;
+    }
+    setStorage(usedKey, "1");
+    setCredits(VALID_CODES[code]);
+    document.getElementById("modalMask").classList.remove("open");
+    err.textContent = "";
+  } else {
+    err.textContent = "激活码无效，请检查后重试";
+  }
+}
+
+// ══════════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════════
+async function handleSubmit() {
+  if (!isActivated()) {
+    document.getElementById("modalMask").classList.add("open");
+    return;
+  }
+
+  const text = document.getElementById("inputText").value.trim();
+  if (!text) {
+    showError("请先输入原稿或卖点描述");
+    return;
+  }
+
+  const credits = getCredits();
+  if (credits <= 0) {
+    showEmptyCredits();
+    return;
+  }
+
+  // UI: loading
+  const btn = document.getElementById("submitBtn");
+  btn.classList.remove("running");
+  void btn.offsetWidth; // reflow触发重新播放
+  btn.classList.add("running");
+  btn.disabled = true;
+  btn.textContent = "🔥 AI 爆改中...";
+  document.getElementById("copyBtn").style.display = "none";
+  showLoading();
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        systemPrompt: PROMPTS[currentStyle],
+        userPrompt: `请帮我处理这段文案内容：${text}`
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data?.error || `请求失败 ${res.status}`);
+      return;
+    }
+
+    const result = data?.choices?.[0]?.message?.content;
+    if (!result) { showError("返回内容为空，请重试"); return; }
+
+    // Deduct credit
+    setCredits(credits - 1);
+
+    // Show result
+    showResult(result);
+
+    // Save history
+    addHistory(currentStyle, text, result);
+
+  } catch(e) {
+    showError("网络请求失败：" + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<span class="btn-shine"></span>⚡ 一键爆改`;
+  }
+}
+
+// ══════════════════════════════════════════════
+// UI HELPERS
+// ══════════════════════════════════════════════
+function showLoading() {
+  document.getElementById("resultArea").innerHTML = `
+    <div class="loading-state">
+      <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+      <div class="loading-txt">AI 正在注入爆款灵魂...</div>
+    </div>`;
+}
+
+function showResult(text) {
+  const area = document.getElementById("resultArea");
+  area.textContent = text;
+  const copyBtn = document.getElementById("copyBtn");
+  copyBtn.style.display = "block";
+  copyBtn.textContent = "📋 复制文案";
+  copyBtn.className = "copy-btn";
+}
+
+function showError(msg) {
+  document.getElementById("resultArea").innerHTML =
+    `<div style="color:#ff6b6b;font-size:13px;padding:8px 0;">❌ ${msg}</div>`;
+}
+
+function showEmptyCredits() {
+  document.getElementById("resultArea").innerHTML = `
+    <div class="empty-credits">
+      <h3>次数已用完 🫙</h3>
+      <p>联系客服购买新的激活码<br/>继续使用爆改服务</p>
+      <a class="contact-link" href="#">联系客服购买</a>
+    </div>`;
+}
+
+function handleCopy() {
+  const text = document.getElementById("resultArea").textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById("copyBtn");
+    btn.textContent = "✅ 已复制！";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "📋 复制文案";
+      btn.classList.remove("copied");
+    }, 1800);
+  });
+}
+
+// ══════════════════════════════════════════════
+// HISTORY
+// ══════════════════════════════════════════════
+const STYLE_NAMES = {
+  video: "短视频", plant: "种草带货", xhs: "小红书",
+  complaint: "吐槽体", dry: "干货", title: "爆款标题"
+};
+
+function addHistory(style, input, output) {
+  history.unshift({ style, input, output, time: Date.now() });
+  if (history.length > 5) history = history.slice(0, 5);
+  renderHistory();
+}
+
+function renderHistory() {
+  if (history.length === 0) return;
+  const strip = document.getElementById("historyStrip");
+  const list  = document.getElementById("historyList");
+  strip.style.display = "block";
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item" onclick="restoreHistory(${i})">
+      <span class="history-style">${STYLE_NAMES[h.style]}</span>
+      <span class="history-preview">${h.output.slice(0, 60).replace(/\n/g, ' ')}...</span>
+    </div>`).join("");
+}
+
+function restoreHistory(i) {
+  showResult(history[i].output);
+  document.getElementById("inputText").value = history[i].input;
+  document.querySelectorAll(".style-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.style === history[i].style);
+  });
+  currentStyle = history[i].style;
+}
+</script>
+</body>
+</html>
